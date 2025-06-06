@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp1());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,6 +34,104 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyApp1 extends StatelessWidget {
+  const MyApp1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Login Demo',
+      debugShowCheckedModeBanner: false,
+      home: const LoginScreen(),
+    );
+  }
+}
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+
+
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    final username = _usernameController.text;
+    final password = _passwordController.text;
+    // Aquí podrías hacer la validación con una API o lógica local
+    print('Username: $username');
+    print('Password: $password');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        toolbarHeight: 300, // Altura del banner
+        flexibleSpace: Image.asset(
+          'assets/logo.png',
+          fit: BoxFit.cover,
+          width: double.infinity,
+        ),
+      ),
+    body: Padding(
+    padding: const EdgeInsets.all(1.0),
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(
+      'Bienvenido a la App',
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: Colors.blue,
+      ),
+      textAlign: TextAlign.center,
+      ),
+    TextField(
+    controller: _usernameController,
+    decoration: const InputDecoration(
+    labelText: 'Username',
+    border: OutlineInputBorder(),
+    ),
+    ),
+    const SizedBox(height: 16),
+    TextField(
+    controller: _passwordController,
+    obscureText: true,
+    decoration: const InputDecoration(
+    labelText: 'Password',
+    border: OutlineInputBorder(),
+    ),
+    ),
+    const SizedBox(height: 24),
+    ElevatedButton(
+    onPressed: _login,
+    child: const Text('Login'),
+    ),
+    ],
+    ),
+    ),
     );
   }
 }
@@ -125,7 +223,6 @@ class _MyHomePageState extends State<MyHomePage> {
             );
         }),
       ),
-
     );
   }
 }
